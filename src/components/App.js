@@ -4,6 +4,7 @@ import React from 'react';
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
+import PopupWithForm from './PopupWithForm.js';
 
 function App() { 
 
@@ -14,23 +15,18 @@ function App() {
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Mesto</title>
-
       </head>
       <body className="page">
         <Header/>
         <Main        
         />
-        <section className="popup-edit popup">
-          <form
-            novalidate
-            className="popup__form popup__container popup-edit__container"
-          >
-            <button
-              aria-label="Close"
-              type="button"
-              className="popup__button-close popup-edit__button-close"
-            ></button>
-            <h2 className="popup__title">Редактировать профиль</h2>
+        <PopupWithForm
+          name='edit'
+          title='Редактировать профиль'
+          textButton='Сохранить'
+          button='save'
+          children={
+            <>
             <input
               placeholder="Имя"
               name="name"
@@ -53,11 +49,10 @@ function App() {
               className="popup__input popup__input_value_description"
             />
             <span className="description-input-error popup__error popup__error_visible"></span>
-            <button type="submit" className="popup__button popup__button-save">
-              Сохранить
-            </button>
-          </form>
-        </section>
+          </>
+          }
+        />
+        
         <section className="popup-add popup">
           <form
             novalidate
@@ -143,7 +138,7 @@ function App() {
               className="popup__input popup__input_value_avatar"
             />
             <span className="avatar-input-error popup__error popup__error_visible"></span>
-            <button type="submit" className="popup__button popup__button-save popup__save-avatar">
+            <button type="submit" className="popup__button popup__button-save">
               Сохранить
             </button>
           </form>

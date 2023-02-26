@@ -1,43 +1,22 @@
 import React from 'react';
-function PopupWithForm() {
+function PopupWithForm(props) {
    return (
-      <section className="popup-edit popup">
+      <section className={`popup popup-${props.name}`}>
          <form
             novalidate
-            className="popup__form popup__container popup-edit__container"
+            className={`popup__form popup__container popup-${props.name}__container`}
          >
             <button
                aria-label="Close"
                type="button"
-               className="popup__button-close popup-edit__button-close"
+               className={`popup__button-close popup-${props.name}__button-close`}
             ></button>
-            <h2 className="popup__title">Редактировать профиль</h2>
-            <input
-               placeholder="Имя"
-               name="name"
-               id="name-input"
-               type="text"
-               minlength="2"
-               maxlength="40"
-               required
-               className="popup__input popup__input_value_name"
-            />
-            <span className="name-input-error popup__error popup__error_visible"></span>
-            <input
-               placeholder="О себе"
-               id="description-input"
-               name="about"
-               minlength="2"
-               maxlength="200"
-               required
-               type="text"
-               className="popup__input popup__input_value_description"
-            />
-            <span className="description-input-error popup__error popup__error_visible"></span>
-            <button type="submit" className="popup__button popup__button-save">
-               Сохранить
+            <h2 className="popup__title">{props.title}</h2>
+            {props.children}
+            <button type="submit" className={`popup__button popup__button-${props.button}`}>
+               {props.textButton}
             </button>
          </form>
       </section>
    )
-}
+}export default PopupWithForm;
