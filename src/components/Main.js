@@ -1,33 +1,22 @@
 import React from 'react';
-function Main() {   
-   function handleEditAvatarClick() {
-      const popup = document.querySelector('.popup-avatar');      
-      popup.classList.add('popup_opened');
-   }
-
-   function handleEditProfileClick() {
-      document.querySelector('.popup-edit').classList.add('popup_opened');
-   }
-
-   function handleAddPlaceClick() {
-      document.querySelector('.popup-add').classList.add('popup_opened');
-   }
+function Main(props) {   
+   
    return ( 
 <main className="content container">
    <section className="profile">
             <button
                type="button"
                className="profile__button-avatar"
-               onClick={handleEditAvatarClick}
+               onClick={props.onEditAvatar}
             >
          <img src="#" alt="Аватар" className="profile__avatar" />
       </button>
       <div className="profile__info">
          <h1 className="profile__name">Жак-Ив Кусто</h1>
-         <button aria-label="Edit" className="profile__edit-button" onClick={handleEditProfileClick}></button>
+         <button aria-label="Edit" className="profile__edit-button" onClick={props.onEditProfile}></button>
          <p className="profile__description">Исследователь</p>
       </div>
-            <button aria-label="Add" className="profile__add-button" onClick={handleAddPlaceClick}></button>
+            <button aria-label="Add" className="profile__add-button" onClick={props.onAddPlace}></button>
    </section>
    <section className="elements">
       <ul className="elements__list">

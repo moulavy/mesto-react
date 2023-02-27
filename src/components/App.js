@@ -5,9 +5,31 @@ import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
 import PopupWithForm from './PopupWithForm.js';
+import ImagePopup from './ImagePopup.js';
 
 function App() { 
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
 
+  function handleEditAvatarClick() {
+    setIsEditAvatarPopupOpen(true);
+  }
+
+  function handleEditProfileClick() {
+    setIsEditProfilePopupOpen(true);
+  }
+
+  function handleAddPlaceClick() {
+    setIsAddPlacePopupOpen(true);
+  }
+
+  function closeAllPopups() {
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+
+  }
   return (    
     <html lang="ru">
       <head>
@@ -18,9 +40,14 @@ function App() {
       </head>
       <body className="page">
         <Header/>
-        <Main        
+        <Main    
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+          onEditAvatar={handleEditAvatarClick}
         />
         <PopupWithForm
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
           name='edit'
           title='Редактировать профиль'
           textButton='Сохранить'
@@ -53,6 +80,8 @@ function App() {
           }
         />
         <PopupWithForm
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
           name='add'
           title='Новое место'
           textButton='Создать'
@@ -82,53 +111,36 @@ function App() {
             </>
           }
         />
+        <ImagePopup />
         <PopupWithForm
+          
           name='confirm'
           title='Вы уверены?'
           textButton='Да'
           button='confirm'
-
-        />
-        
-        <section className="popup-img popup">
-          <div className="popup-img__container">
-            <button
-              aria-label="Close"
-              type="button"
-              className="popup__button-close popup-img__button-close"
-            ></button>
-            <img src="#" alt="" className="popup-img__photo" />
-            <p className="popup-img__subtitle"></p>
-          </div>
-        </section>
-        
-        <section className="popup-avatar popup">
-          <form
-            novalidate
-            className="popup__form popup__container popup-avatar__container"
-          >
-            <button
-              aria-label="Close"
-              type="button"
-              className="popup__button-close popup-avatar__button-close"
-            ></button>
-            <h2 className="popup__title">Обновить аватар</h2>
-            <input
-              placeholder="Ссылка на изображение"
-              id="avatar-input"
-              name="avatar"
-              required
-              type="url"
-              className="popup__input popup__input_value_avatar"
-            />
-            <span className="avatar-input-error popup__error popup__error_visible"></span>
-            <button type="submit" className="popup__button popup__button-save">
-              Сохранить
-            </button>
-          </form>
-        </section>
+        />               
+        <PopupWithForm
+          onClose={closeAllPopups}
+          isOpen={isEditAvatarPopupOpen}
+          name='avatar'
+          title='Обновить аватар'
+          textButton='Сохранить'
+          button='save'
+          children={
+            <>
+              <input
+                placeholder="Ссылка на изображение"
+                id="avatar-input"
+                name="avatar"
+                required
+                type="url"
+                className="popup__input popup__input_value_avatar"
+              />
+              <span className="avatar-input-error popup__error popup__error_visible"></span>
+            </>
+          }
+        />           
         <Footer/>
-
       </body>
     </html>
 
