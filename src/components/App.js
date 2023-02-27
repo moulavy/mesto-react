@@ -38,15 +38,8 @@ function App() {
     setIsImagePopupOpen(false);
 
   }
-  return (    
-    <html lang="ru">
-      <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Mesto</title>
-      </head>
-      <body className="page">
+  return (        
+      <div className="page">
         <Header/>
         <Main    
           onEditProfile={handleEditProfileClick}
@@ -68,8 +61,8 @@ function App() {
               name="name"
               id="name-input"
               type="text"
-              minlength="2"
-              maxlength="40"
+              minLength="2"
+              maxLength="40"
               required
               className="popup__input popup__input_value_name"
             />
@@ -78,8 +71,8 @@ function App() {
               placeholder="О себе"
               id="description-input"
               name="about"
-              minlength="2"
-              maxlength="200"
+              minLength="2"
+              maxLength="200"
               required
               type="text"
               className="popup__input popup__input_value_description"
@@ -100,8 +93,8 @@ function App() {
               <input
                 id="name-img-input"
                 type="text"
-                minlength="2"
-                maxlength="30"
+                minLength="2"
+                maxLength="30"
                 name="name"
                 required
                 placeholder="Название"
@@ -150,8 +143,8 @@ function App() {
           }
         />           
         <Footer/>
-      </body>
-    </html>
+      </div>
+
 
   );
 }
