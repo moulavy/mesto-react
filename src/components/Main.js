@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
-import api from '../utils/api.js'
+import api from '../utils/api.js';
+import Card from './Card.js'
 function Main(props) {   
    const [userName, setUserName] = React.useState('');
    const [userDescription, setUserDescription] = React.useState('');
    const [userAvatar, setUserAvatar] = React.useState('');
+   const [cards, setCards] = React.useState([]);
 
    useEffect(() => {
       Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -11,6 +13,7 @@ function Main(props) {
             setUserName(resUser.name);
             setUserDescription(resUser.about);
             setUserAvatar(resUser.avatar);
+            setCards(resCards);
          })
          .catch((err) => {
             console.log(err);
@@ -35,17 +38,11 @@ function Main(props) {
    </section>
    <section className="elements">
       <ul className="elements__list">
-         <template id="elements__element">
-            <li className="elements__element">
-               <button className="elements__button-delete "></button>
-               <img className="elements__image" />
-               <h2 className="elements__title"></h2>
-               <div className="elements__button-like">
-                  <button aria-label="Like" className="elements__button-heart"></button>
-                  <p className="elements__like-counter">8</p>
-               </div>
-            </li>
-         </template>
+               {cards.map((card) =>
+                  <Card
+                     card={card}
+                  />
+               )}
       </ul>
    </section>
       </main>
