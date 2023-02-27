@@ -40,6 +40,7 @@ function Main(props) {
       <ul className="elements__list">
                {cards.map((card) =>
                   <Card
+                     onCardClick={props.onCardClick}
                      card={card}
                   />
                )}
