@@ -1,4 +1,4 @@
-export class Api {
+class Api {
    constructor(options) {
       this._baseUrl = options.baseUrl;
       this._headers = options.headers;
@@ -121,3 +121,12 @@ export class Api {
   
 }
 
+const api = new Api({
+   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-59',
+   headers: {
+      authorization: '38bff190-d9e4-489d-92fd-14576c2befb7',
+      'Content-Type': 'application/json'
+   }
+}); 
+
+export default api;
