@@ -52,44 +52,44 @@ function App() {
           </>
           }
         />
-        
-        <section className="popup-add popup">
-          <form
-            novalidate
-            className="popup__form popup__container popup-add__container"
-          >
-            <button
-              aria-label="Close"
-              type="reset"
-              className="popup__button-close popup-add__button-close"
-            ></button>
-            <h2 className="popup__title">Новое место</h2>
-            <input
-              id="name-img-input"
-              type="text"
-              minlength="2"
-              maxlength="30"
-              name="name"
-              required
-              placeholder="Название"
-              className="popup__input popup__input_value_name-img"
-            />
-            <span className="popup__error popup__error_visible name-img-input-error"></span>
-            <input
-              id="link-img-input"
-              type="url"
-              required
-              name="link"
-              placeholder="Ссылка на картинку"
-              className="popup__input popup__input_value_link-img"
-            />
-            <span className="popup__error popup__error_visible link-img-input-error"></span>
+        <PopupWithForm
+          name='add'
+          title='Новое место'
+          textButton='Создать'
+          button='add'
+          children={
+            <>
+              <input
+                id="name-img-input"
+                type="text"
+                minlength="2"
+                maxlength="30"
+                name="name"
+                required
+                placeholder="Название"
+                className="popup__input popup__input_value_name-img"
+              />
+              <span className="popup__error popup__error_visible name-img-input-error"></span>
+              <input
+                id="link-img-input"
+                type="url"
+                required
+                name="link"
+                placeholder="Ссылка на картинку"
+                className="popup__input popup__input_value_link-img"
+              />
+              <span className="popup__error popup__error_visible link-img-input-error"></span>
+            </>
+          }
+        />
+        <PopupWithForm
+          name='confirm'
+          title='Вы уверены?'
+          textButton='Да'
+          button='confirm'
 
-            <button type="submit" className="popup__button popup__button-add">
-              Создать
-            </button>
-          </form>
-        </section>
+        />
+        
         <section className="popup-img popup">
           <div className="popup-img__container">
             <button
@@ -101,23 +101,7 @@ function App() {
             <p className="popup-img__subtitle"></p>
           </div>
         </section>
-        <section className="popup-confirm popup">
-          <form
-            novalidate
-            className="popup__form popup__container popup-confirm__container"
-          >
-            <button
-              aria-label="Close"
-              type="reset"
-              className="popup__button-close popup-confirm__button-close"
-            ></button>
-            <h2 className="popup__title">Вы уверены?</h2>
-
-            <button type="submit" className="popup__button popup__button-confirm">
-              Да
-            </button>
-          </form>
-        </section>
+        
         <section className="popup-avatar popup">
           <form
             novalidate
