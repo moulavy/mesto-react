@@ -1,22 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
-import api from '../utils/api.js';
-import Card from './Card.js'
-function Main(props) {
 
-   const [cards, setCards] = React.useState([]);
+import Card from './Card.js'
+function Main(props) {   
 
    const currentUser = React.useContext(CurrentUserContext);
 
-   useEffect(() => {
-      Promise.all([api.getInitialCards()])
-         .then(([resCards]) => {
-            setCards(resCards);
-         })
-         .catch((err) => {
-            console.log(err);
-         });
-   }, [])
    return (
       <main className="content container">
          <section className="profile">
@@ -36,9 +25,11 @@ function Main(props) {
          </section>
          <section className="elements">
             <ul className="elements__list">
-               {cards.map((card) =>
+               {props.cards.map((card) =>
                   <Card
+                     onCardLike={props.onCardLike}
                      onCardClick={props.onCardClick}
+                     onCardDelete={props.onCardDelete}
                      card={card}
                      key={card._id}
                   />
