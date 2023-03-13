@@ -6,6 +6,7 @@ import Main from './Main.js';
 import Footer from './Footer.js';
 import PopupWithForm from './PopupWithForm.js';
 import ImagePopup from './ImagePopup.js';
+import EditProfilePopup from './EditProfilePopup.js'
 import api from '../utils/api'
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext'
@@ -93,6 +94,19 @@ function App() {
         });
     }
   }
+
+  function handleUpdateUser(data) {
+    api.updateUserInfo(data)
+      .then((res) => {
+        setCurrentUser(res);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      
+  }
+
   return (        
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
@@ -106,40 +120,8 @@ function App() {
           onCardLike={handleCardLike}
           onCardDelete={handleCardDelete}
         />
-        <PopupWithForm
-          isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}
-          name='edit'
-          title='Редактировать профиль'
-          textButton='Сохранить'
-          button='save'
-          children={
-            <>
-            <input
-              placeholder="Имя"
-              name="name"
-              id="name-input"
-              type="text"
-              minLength="2"
-              maxLength="40"
-              required
-              className="popup__input popup__input_value_name"
-            />
-            <span className="name-input-error popup__error popup__error_visible"></span>
-            <input
-              placeholder="О себе"
-              id="description-input"
-              name="about"
-              minLength="2"
-              maxLength="200"
-              required
-              type="text"
-              className="popup__input popup__input_value_description"
-            />
-            <span className="description-input-error popup__error popup__error_visible"></span>
-          </>
-          }
-        />
+        <EditProfilePopup isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
         <PopupWithForm
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
