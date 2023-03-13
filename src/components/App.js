@@ -7,6 +7,7 @@ import Footer from './Footer.js';
 import PopupWithForm from './PopupWithForm.js';
 import ImagePopup from './ImagePopup.js';
 import EditProfilePopup from './EditProfilePopup.js'
+import EditAvatarPopup from './EditAvatarPopup';
 import api from '../utils/api'
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext'
@@ -103,8 +104,18 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+      })      
+  }
+
+  function handleUpdateAvatar(data) {
+    api.updateAvatar(data)
+      .then((res) => {
+        setCurrentUser(res);
+        closeAllPopups();
       })
-      
+      .catch((err) => {
+        console.log(err);
+      })  
   }
 
   return (        
@@ -161,28 +172,9 @@ function App() {
           title='Вы уверены?'
           textButton='Да'
           button='confirm'
-        />               
-        <PopupWithForm
-          onClose={closeAllPopups}
-          isOpen={isEditAvatarPopupOpen}
-          name='avatar'
-          title='Обновить аватар'
-          textButton='Сохранить'
-          button='save'
-          children={
-            <>
-              <input
-                placeholder="Ссылка на изображение"
-                id="avatar-input"
-                name="avatar"
-                required
-                type="url"
-                className="popup__input popup__input_value_avatar"
-              />
-              <span className="avatar-input-error popup__error popup__error_visible"></span>
-            </>
-          }
-        />           
+        />  
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
+        
         <Footer />
       </CurrentUserContext.Provider>
       </div>
