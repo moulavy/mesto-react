@@ -8,6 +8,7 @@ import PopupWithForm from './PopupWithForm.js';
 import ImagePopup from './ImagePopup.js';
 import EditProfilePopup from './EditProfilePopup.js'
 import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
 import api from '../utils/api'
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext'
@@ -118,6 +119,17 @@ function App() {
       })  
   }
 
+  function handleAddPlaceSubmit(data) {
+    api.addNewCard(data)
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      })  
+    }  
+
   return (        
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
@@ -133,38 +145,7 @@ function App() {
         />
         <EditProfilePopup isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
-        <PopupWithForm
-          isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-          name='add'
-          title='Новое место'
-          textButton='Создать'
-          button='add'
-          children={
-            <>
-              <input
-                id="name-img-input"
-                type="text"
-                minLength="2"
-                maxLength="30"
-                name="name"
-                required
-                placeholder="Название"
-                className="popup__input popup__input_value_name-img"
-              />
-              <span className="popup__error popup__error_visible name-img-input-error"></span>
-              <input
-                id="link-img-input"
-                type="url"
-                required
-                name="link"
-                placeholder="Ссылка на картинку"
-                className="popup__input popup__input_value_link-img"
-              />
-              <span className="popup__error popup__error_visible link-img-input-error"></span>
-            </>
-          }
-        />
+        
         <ImagePopup card={selectedCard} isOpen={isImagePopupOpen} onClose={closeAllPopups } />
         <PopupWithForm
           
@@ -174,7 +155,7 @@ function App() {
           button='confirm'
         />  
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
-        
+        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={ handleAddPlaceSubmit} />
         <Footer />
       </CurrentUserContext.Provider>
       </div>
