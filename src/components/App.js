@@ -1,4 +1,4 @@
-import '../index.css';
+
 import React from 'react';
 import Header from './Header.js';
 import Main from './Main.js';
@@ -84,7 +84,7 @@ function App() {
           console.log(err);
         });
     }
-    else if (isLiked) {
+    else {
       api.deleteLike(card._id)
         .then((newCard) => {
           setCards((state) => state.map((item) => item._id === card._id ? newCard : item));
