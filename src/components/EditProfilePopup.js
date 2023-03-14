@@ -18,11 +18,8 @@ function EditProfilePopup(props) {
    function handleChangeDescription(e) {
       setDescription(e.target.value);
    }
-   function handleSubmit(e) {
-      // Запрещаем браузеру переходить по адресу формы
+   function handleSubmit(e) {      
       e.preventDefault();
-
-      // Передаём значения управляемых компонентов во внешний обработчик
       props.onUpdateUser({
          name,
          about: description,
